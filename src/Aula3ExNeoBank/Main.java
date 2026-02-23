@@ -1,6 +1,5 @@
 package Aula3ExNeoBank;
 
-import java.text.DecimalFormat;
 import java.util.Random;
 import java.util.Scanner;
 
