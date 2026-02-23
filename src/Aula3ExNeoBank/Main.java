@@ -13,9 +13,14 @@ public class Main {
         System.out.print("Nome do correntista: ");
         conta.correntista = sc.next();
         conta.numConta = rd.nextInt(1000, 9999);
+        System.out.println("Número da sua conta: " + conta.numConta);
 
+        System.out.print("Quanto você quer depositar : ");
+        conta.depositar(5000);
         System.out.println(conta.saldo);
-        conta.depositar(8500);
+
+        System.out.print("Quanto você quer sacar : ");
+        conta.sacar(250);
         System.out.println(conta.saldo);
 
     }
