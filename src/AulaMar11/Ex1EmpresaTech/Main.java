@@ -8,8 +8,8 @@ public class Main {
         monitor.registrar(2);
         monitor.registrar(3);
 
-        System.out.println(monitor.calcularMedia(1, 2));
         System.out.println(monitor.calcularMedia());
+        System.out.println(monitor.calcularMedia(1, 2));
 
     }
 }
