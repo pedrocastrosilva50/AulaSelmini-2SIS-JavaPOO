@@ -12,6 +12,7 @@ public class BilheteUnico {
         this.numero = gerarNumero();
         this.saldo = 0;
         this.usuario = usuario;
+
     }
 
     public int gerarNumero() {
@@ -24,13 +25,20 @@ public class BilheteUnico {
     }
 
     public double calcularTarifa() {
-        return 0.0;
+        if(usuario.tipoTarifa.equalsIgnoreCase("comum")) {
+            return tarifaBase;
+        }
+        return tarifaBase / 2;
     }
 
     public boolean passarNaCatraca() {
         double valor = calcularTarifa();
-
+        if(saldo < valor) {
+            return false;
+        }
+        saldo -= valor;
         return true;
     }
 
 }
+

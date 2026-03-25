@@ -3,11 +3,11 @@ package AulaMar17.Ex3BilheteUnico;
 public class Usuario {
     String nome;
     long cpf;
-    String tpTarifa;
+    String tipoTarifa;
 
-    public Usuario(String nome, long cpf,String tpTarifa) {
+    public Usuario(String nome, long cpf,String tipoTarifa) {
         this.nome = nome;
         this.cpf = cpf;
-        this.tpTarifa = tpTarifa;
+        this.tipoTarifa = tipoTarifa;
     }
 }
