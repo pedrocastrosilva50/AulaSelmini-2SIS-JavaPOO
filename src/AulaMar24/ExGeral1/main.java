@@ -1,6 +1,7 @@
 package AulaMar24.ExGeral1;
 
 import java.awt.*;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class main {
@@ -27,20 +28,13 @@ public class main {
 
             switch (opcao){
                 case 1 -> entradaVeic();
-                /*case 2 -> saidaVeic();*/
+                case 2 -> saidaVeic();
                 case 3 -> veicEstacionados();
-                /*
-                case 4 -> printReceita();
-                case 5 -> finalizar();*/
+                case 4 -> imprimirReceita();
+                case 5 -> System.out.println("ParkEasy agradece !");
             }
 
         } while (opcao != 5);
-    }
-
-    public static void veicEstacionados(){
-        for (int i = 0; i < indexControle; i++){
-            System.out.println(controles[i].veiculo.placa);
-        }
     }
 
     public static void entradaVeic() {
@@ -48,11 +42,13 @@ public class main {
         String nome;
         long cpf;
         String horaEntrada;
-        Veiculo veiculo = pesquisar();
+
+        System.out.print("Placa: ");
+        placa = sc.next().toUpperCase();
+
+        Veiculo veiculo = pesquisar(placa);
 
         if (veiculo == null){
-            System.out.print("Placa: ");
-            placa = sc.next().toUpperCase();
             System.out.print("Marca: ");
             marca = sc.next();
             System.out.print("Modelo: ");
@@ -63,7 +59,8 @@ public class main {
             cpf = sc.nextLong();
 
             Proprietario proprietario = new Proprietario(nome, cpf);
-            veiculos[indexVeiculo] = new Veiculo(placa, marca, modelo, proprietario);
+            veiculo = new Veiculo(placa, marca, modelo, proprietario);
+            veiculos[indexVeiculo] = veiculo;
             indexVeiculo++;
         }
         System.out.print("Hora de entrada (hh:mm): ");
@@ -72,10 +69,46 @@ public class main {
         indexControle++;
     }
 
-    public static Veiculo pesquisar(){
+    public static Controle pesquisarControle() {
         String placa;
         System.out.print("Placa para pesquisa: ");
         placa = sc.next().toUpperCase();
+        for (int i = 0; i < indexControle; i++) {
+            if (controles[i].veiculo.placa.equals(placa)) {
+                return controles[i];
+            }
+        }
+        System.out.println("Veículo não cadastrado em nossa base de dados");
+        return null;
+    }
+
+    public static void saidaVeic (){
+        DecimalFormat df = new DecimalFormat("#,##0.0");
+        double valor;
+        String horaSaida;
+        Controle controle = pesquisarControle();
+
+                if(controle != null) {
+                    System.out.print("Informe a hora de saída: ");
+                    horaSaida = sc.next();
+                    controle.horaSaida = horaSaida;
+                    valor = controle.calcularEstadia();
+                    System.out.println("Valor da estadia: R$"+df.format(valor));
+                }
+        indexVeiculo--;
+    }
+
+    public static void veicEstacionados(){
+        for (int i = 0; i < indexControle; i++){
+            if(controles[i].horaSaida == null){
+                System.out.println(controles[i].veiculo.placa);
+            }
+            System.out.println();
+            System.out.println(controles[i].veiculo.placa);
+        }
+    }
+
+    public static Veiculo pesquisar(String placa){
         for (int i = 0; i < indexVeiculo; i++){
             if (veiculos[i].placa.equals(placa)){
                 return veiculos[i];
@@ -83,6 +116,17 @@ public class main {
         }
         System.out.println("Veículo não cadastrado em nossa base de dados");
         return null;
+    }
+
+    public static void imprimirReceita() {
+        DecimalFormat df = new DecimalFormat("#,##0.0");
+        double total = 0;
+        for (int i = 0; i < indexControle; i++){
+            if (controles[i].horaSaida != null){
+                total += controles[i].calcularEstadia();
+            }
+        }
+        System.out.println("Receita até o momento: R$"+ df.format(total));
     }
 
 
