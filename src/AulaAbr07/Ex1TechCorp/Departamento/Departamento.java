@@ -2,29 +2,31 @@ package AulaAbr07.Ex1TechCorp.Departamento;
 
 import AulaAbr07.Ex1TechCorp.Funcionario.Funcionario;
 
+import java.text.DecimalFormat;
+
 public class Departamento {
     private String codigo;
     private String nome;
     private Funcionario[] funcionarios;
     private int index;
 
-    public Departamento (String codigo, String nome) {
+    public Departamento(String codigo, String nome) {
         this.codigo = codigo;
         this.nome = nome;
         this.index = 0;
         this.funcionarios = new Funcionario[5];
     }
 
-    public void adicionarFuncionario (Funcionario f){
-        if (index > funcionarios.length && f.isAtivo()){
+    public void adicionarFuncionario(Funcionario f) {
+        if(index < funcionarios.length && f.isAtivo()) {
             funcionarios[index++] = f;
         }
     }
 
     public double calcularFolhaTotalLiquida() {
         double total = 0;
-        for (int i = 0; i < index; i++) {
-            if (funcionarios[i].isAtivo()){
+        for(int i = 0; i < index; i++) {
+            if(funcionarios[i].isAtivo()) {
                 total += funcionarios[i].calcularSalarioLiquido();
             }
         }
@@ -33,28 +35,37 @@ public class Departamento {
 
     public int getTotalFuncionariosAtivos() {
         int total = 0;
-        for (int i = 0; i < index; i++){
-            if (funcionarios[i].isAtivo()){
+        for(int i = 0; i < index; i++) {
+            if(funcionarios[i].isAtivo()) {
                 total++;
             }
         }
         return total;
     }
 
-    public Funcionario buscarFuncionario (String matricula){
-        for (int i = 0; i < index; i++){
-            if (funcionarios[i].getMatricula().equalsIgnoreCase(matricula)){
+    public Funcionario buscarFuncionario(String matricula) {
+        for(int i = 0; i < index; i++) {
+            if(funcionarios[i].getMatricula().equalsIgnoreCase(matricula)) {
                 return funcionarios[i];
             }
         }
         return null;
     }
 
-    public void removerFuncionario(String matricula){
+    public void removerFuncionario(String matricula) {
         Funcionario aux = buscarFuncionario(matricula);
-        if (aux != null){
+        if(aux != null) {
             aux.desligar();
         }
+    }
+
+    public String exibirRelatorio() {
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+        String aux = "";
+        aux += "Departamento: " + nome + "\n";
+        aux += "Total de funcionários ativos: " + getTotalFuncionariosAtivos() + "\n";
+        aux += "Folha de pagamento: " + df.format(calcularFolhaTotalLiquida()) + "\n";
+        return aux;
     }
 
     public String getCodigo() {
@@ -68,8 +79,5 @@ public class Departamento {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-
-
 }
 

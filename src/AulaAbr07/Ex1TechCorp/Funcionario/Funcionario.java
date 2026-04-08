@@ -1,5 +1,8 @@
 package AulaAbr07.Ex1TechCorp.Funcionario;
 
+import java.text.DecimalFormat;
+
+
 public class Funcionario {
     private String matricula;
     private String nome;
@@ -13,12 +16,14 @@ public class Funcionario {
         this.nome = nome;
         this.cargo = cargo;
         this.salarioBase = salarioBase;
+        this.ativo = true;
     }
 
     public double calcularSalarioLiquido() {
-        double salarioLiquido = salarioBase + salarioBase * percentualBonus / 100;
-        return salarioLiquido * 0.85;
+        double salario = salarioBase + salarioBase * percentualBonus / 100;
+        return salario * 0.85;
     }
+
 
     public void definirBonus(double percentual) {
         if(percentual > 0) {
@@ -30,6 +35,17 @@ public class Funcionario {
         ativo = false;
         percentualBonus = 0;
     }
+
+    public String exibirResumo() {
+        DecimalFormat df = new DecimalFormat("#,##0.00");
+        String aux = "";
+        aux += "Matrícula: " + matricula + "\n";
+        aux += "Nome: " + nome + "\n";
+        aux += "Cargo: " + cargo + "\n";
+        aux += "Salário líquido: " + df.format(calcularSalarioLiquido()) + "\n";
+        return aux;
+    }
+
 
     public boolean isAtivo() {
         return ativo;
