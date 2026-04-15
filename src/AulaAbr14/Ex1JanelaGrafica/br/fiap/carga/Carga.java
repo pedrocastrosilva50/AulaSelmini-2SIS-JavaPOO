@@ -1,0 +1,62 @@
+package AulaAbr14.Ex1JanelaGrafica.br.fiap.carga;
+
+import AulaAbr14.Ex1JanelaGrafica.br.fiap.cliente.Cliente;
+
+import java.util.Random;
+
+public class Carga {
+
+    private int id;
+    private String destino;
+    private double peso;
+    private Cliente cliente; // NAO DECLARAR OBJETO AQUI
+
+    public Carga(String destino, Cliente cliente) {
+        Random rd = new Random(); // RANDOM LOCAL, DENTRO DO CONSTRUTOR
+        this.destino = destino;
+        this.cliente = cliente;
+        this.id = rd.nextInt(1000, 9999); ;
+        this.peso = rd.nextDouble(100, 999);
+    }
+
+    public String getDados() {
+        String aux = "";
+        aux += "ID: "+ id +"\n";
+        aux += "Destino: " +destino+ "\n";
+        aux += "Peso: "+ String.format("%.2f", peso) +"\n";
+        aux += cliente.getDados();
+        return aux;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDestino() {
+        return destino;
+    }
+
+    public void setDestino(String destino) {
+        this.destino = destino;
+    }
+
+    public double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(double peso) {
+        this.peso = peso;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+}
