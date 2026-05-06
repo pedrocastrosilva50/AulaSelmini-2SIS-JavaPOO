@@ -2,7 +2,7 @@ package AulaMai05.TechGeo.Forma;
 
 import AulaMai05.TechGeo.Ponto.Ponto;
 
-public class Cilindro {
+public class Cilindro extends Forma{
     private double raio;
     private double altura;
     private Ponto ponto;

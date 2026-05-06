@@ -2,7 +2,7 @@ package AulaMai05.TechGeo.Forma;
 
 import AulaMai05.TechGeo.Ponto.Ponto;
 
-public class Circulo {
+public class Circulo extends Forma {
 
     private Ponto ponto;
     private double raio;
