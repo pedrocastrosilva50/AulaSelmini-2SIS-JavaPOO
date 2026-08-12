@@ -43,6 +43,7 @@ public class CategoriaDAO {
 
     public String pesquisar(int id) {
         sql = "select * from java_categoria where id = ?";
+
     }
 
 }
