@@ -5,8 +5,8 @@ import java.sql.SQLException;
 
 public class Conexao {
     private final String url = "jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl";
-    private final String user = "rm564200";
-    private final String password = "121206";
+    private final String user = "";
+    private final String password = "";
 
     public Connection conectar() {
         try {
