@@ -11,5 +11,6 @@ public class Animal {
 
     public double CalcularPrecoBase() {
 
+        return 0;
     }
 }
