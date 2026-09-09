@@ -1,4 +1,6 @@
-package AulaSet01.Collections.Ex2;
+package AulaSet01.Collections.Ex2.Real;
+
+import java.util.Objects;
 
 public class Aluno {
     private int rm;
@@ -25,11 +27,21 @@ public class Aluno {
         this.nome = nome;
     }
 
+
     @Override
     public String toString() {
-        return "Aluno {" +
-                "rm= " + rm +
-                ", nome= " + nome +
-                '}';
+        return rm + "  |  " + nome;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Aluno aluno = (Aluno) o;
+        return rm == aluno.rm && Objects.equals(nome, aluno.nome);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rm, nome);
     }
 }
